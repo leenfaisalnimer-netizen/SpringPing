@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SpringPing — Chat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="chat-page">
+      <!--SIDEBAR (LEFT) -->
+      <aside class="sidebar">
+        <!-- logo + app name-->
+        <div class="sidebar-header">
+          <div class="brand">
+            <img src="assets/logo.png" alt="Spring Fest" />
+            <span class="brand-name">SpringPing</span>
+          </div>
+        </div>
+
+        <!-- MY PROFILE CARD -->
+        <div class="me-card">
+          <div class="avatar-wrapper online" id="myAvatarWrap">
+            <div class="avatar">
+              <img id="myAvatar" alt="me" />
+            </div>
+            <span class="dot"></span>
+          </div>
+          <div>
+            <div class="me-name" id="myName">—</div>
+            <div class="me-meta">Online · You</div>
+          </div>
+        </div>
+
+        <!--SEARCH -->
+        <div class="sidebar-search">
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="Search users..."
+          />
+        </div>
+
+        <!-- USER LIST -->
+        <div class="user-list" id="userList">
+          <!-- User items get injected  -->
+        </div>
+      </aside>
+
+      <!-- MAIN CHAT (RIGHT) -->
+      <section class="chat-main">
+        <!-- CHAT HEADER  -->
+
+        <header class="chat-header" id="chatHeader" style="display: none">
+          <div class="avatar-wrapper online" id="peerAvatarWrap">
+            <div class="avatar">
+              <img id="peerAvatar" alt="peer" />
+            </div>
+            <span class="dot"></span>
+          </div>
+          <div>
+            <div class="peer-name" id="peerName">—</div>
+            <div class="peer-status online" id="peerStatus">Online</div>
+          </div>
+        </header>
+
+        <!-- MESSAGES AREA-->
+        <div class="messages" id="messages">
+          <!-- Empty state (when no user selected) -->
+          <div class="empty-state" id="emptyState">
+            <img src="assets/logo.png" alt="" />
+            <h5 class="mb-1" style="color: #e83e48; font-weight: 700">
+              Welcome to SpringPing
+            </h5>
+            <div>Pick a classmate on the left to start chatting.</div>
+          </div>
+        </div>
+
+        <!-- message input -->
+        <div class="composer" id="composer" style="display: none">
+          <!--  camera icon-->
+          <button class="icon-btn" id="imageBtn" title="Send image">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10.5" r="1.5" />
+              <path d="M21 15l-5-5L5 21" />
+            </svg>
+          </button>
+          <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            style="display: none"
+          />
+
+          <!-- Text input -->
+          <input
+            type="text"
+            id="msgInput"
+            class="form-control"
+            placeholder="Type a message..."
+            autocomplete="off"
+          />
+
+          <!-- Send button (paper plane) -->
+          <button class="send-btn" id="sendBtn" title="Send">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <script src="chat.js"></script>
+  </body>
+</html>

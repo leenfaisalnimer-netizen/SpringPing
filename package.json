@@ -1,0 +1,14 @@
+{
+  "name": "springping",
+  "version": "1.0.0",
+  "description": "SpringPing - A LAN chat app built with Electron (Spring Fest 2026)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Spring Fest 2026",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.5.1"
+  }
+}
