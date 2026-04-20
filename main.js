@@ -77,14 +77,12 @@ ipcMain.handle('05:ws:join', (_event, hostIP) => {
 ipcMain.handle('06:ws:send', (_event, message) => {
   const packet = JSON.stringify({ type: 'message', data: message });
 
-  // If we are the HOST, broadcast to everyone AND handle locally
+  // If we are the HOST, route only to the sender + selected recipient
   if (wsServer) {
-    broadcastToAll(packet);
-    // Also deliver to our own renderer so it shows up
-    sendToRenderer('ws:message', message);
+    deliverDirectMessage(message);
   }
 
-  // If we are a CLIENT, send to the server and it will broadcast back to us
+  // If we are a CLIENT, send to the server and it will route it back correctly
   if (wsClient && wsClient.readyState === WebSocket.OPEN) {
     wsClient.send(packet);
   }
@@ -127,6 +125,37 @@ function broadcastToAll(rawJson) {
       client.send(rawJson);
     }
   });
+}
+
+function sendToClientByUserId(userId, rawJson) {
+  const client = wsClients.find((socket) => {
+    return socket._springpingUserId === userId &&
+           socket.readyState === WebSocket.OPEN;
+  });
+
+  if (client) {
+    client.send(rawJson);
+  }
+}
+
+function deliverDirectMessage(message) {
+  const rawJson = JSON.stringify({ type: 'message', data: message });
+
+  // Echo to the sender so their own message appears locally.
+  if (message.from === currentUser.id) {
+    sendToRenderer('ws:message', message);
+  } else {
+    sendToClientByUserId(message.from, rawJson);
+  }
+
+  // Deliver only to the selected recipient.
+  if (message.to === currentUser.id) {
+    if (message.to !== message.from) {
+      sendToRenderer('ws:message', message);
+    }
+  } else if (message.to !== message.from) {
+    sendToClientByUserId(message.to, rawJson);
+  }
 }
 
 
@@ -231,13 +260,13 @@ function handleServerPacket(socket, packet) {
       break;
     }
 
-    // A chat message ,relay it to everyone
+    // A chat message, route it only to the sender and recipient
     case 'message': {
       const msg = packet.data;
-      // Broadcast to all clients (including the sender so they get confirmation)
-      broadcastToAll(JSON.stringify(packet));
-      // Also show it on the host's own renderer
-      sendToRenderer('ws:message', msg);
+
+      // Trust the connected socket for the sender identity.
+      msg.from = socket._springpingUserId;
+      deliverDirectMessage(msg);
       break;
     }
   }
