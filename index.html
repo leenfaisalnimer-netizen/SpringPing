@@ -18,12 +18,7 @@
     <link href="styles.css" rel="stylesheet" />
   </head>
   <body class="welcome-page">
-    <!--WELCOME CARD 
-         Spring Fest logo
-         Title + subtitle
-         Avatar uploader
-         Name field
-         Join button  -->
+
     <main class="welcome-card">
       <img src="assets/logo.png" alt="Spring Fest" class="welcome-logo" />
 
@@ -41,7 +36,7 @@
         <input type="file" id="avatarInput" accept="image/*" />
       </label>
 
-      <!--NAME INPUT + JOIN BUTTON-->
+      <!--NAME INPUT -->
       <div class="mb-3 text-start">
         <label for="nameInput" class="form-label small text-muted mb-1"
           >User Name</label
@@ -55,6 +50,30 @@
         />
       </div>
 
+      <!--TODO (new) ROOM MODE SELECTOR — Host or Join ================================== -->
+      <div class="mode-selector mb-3" id="modeSelector">
+        <button type="button" class="mode-btn active" id="btnModeHost" data-mode="host">
+          Create Room
+        </button>
+        <button type="button" class="mode-btn" id="btnModeJoin" data-mode="join">
+          Join Room
+        </button>
+      </div>
+
+      <!--TODO (new) HOST IP INPUT — only visible when "Join Room" is selected -->
+      <div class="mb-3 text-start" id="hostIpGroup" style="display: none">
+        <label for="hostIpInput" class="form-label small text-muted mb-1"
+          >Host IP Address</label
+        >
+        <input
+          type="text"
+          id="hostIpInput"
+          class="form-control"
+          placeholder="e.g. 192.168.1.5"
+          maxlength="45"
+        />
+      </div>
+      <!--TODO (new) END ROOM MODE ====================================================== -->
       <button
         type="button"
         id="joinBtn"

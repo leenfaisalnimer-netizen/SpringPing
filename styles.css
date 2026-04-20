@@ -1,6 +1,6 @@
-/* 
+/*
    SpringPing color palette :
-    #FFFFFF  #F7AC9C  #EF6E76  #EB4D56  #E83E48 
+    #FFFFFF  #F7AC9C  #EF6E76  #EB4D56  #E83E48
    */
 
 /* CSS variables */
@@ -11,10 +11,10 @@
   --sp-red: #eb4d56;
   --sp-deep: #e83e48;
 
-  --sp-text: #202124; /* Google-ish near-black for body text   */
-  --sp-muted: #5f6368; /* Google-ish muted gray for secondary   */
-  --sp-line: #e8eaed; /* Subtle divider line                   */
-  --sp-bg: #f8f9fa; /* Soft off-white background             */
+  --sp-text: #202124; 
+  --sp-muted: #5f6368; 
+  --sp-line: #e8eaed; 
+  --sp-bg: #f8f9fa; 
 
   --sp-shadow-sm:
     0 1px 2px rgba(60, 64, 67, 0.08), 0 1px 3px rgba(60, 64, 67, 0.12);
@@ -194,6 +194,43 @@ body {
   display: none;
 }
 
+
+
+//  TODO (new) MODE SELECTOR — "Create Room" / "Join Room" toggle buttons on the welcome screen===================================
+
+.mode-selector {
+  display: flex;
+  gap: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--sp-line);
+  background: var(--sp-bg);
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  color: var(--sp-muted);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.mode-btn.active {
+  background: var(--sp-red);
+  color: var(--sp-white);
+}
+
+.mode-btn:not(.active):hover {
+  background: rgba(247, 172, 156, 0.2);
+  color: var(--sp-text);
+}
+/*TODO (new) END MODE SELECTOR ===================================================================== */
+
+
 /* CHAT SCREEN */
 
 /* CHAT LAYOUT (sidebar + main) #
@@ -266,6 +303,15 @@ body {
   color: var(--sp-muted);
 }
 
+
+  // TODO  (new) NETWORK STATUS BAR — sits below the profile card in the sidebar=================================
+.net-bar {
+  padding: 0.5rem 1.25rem;
+  border-bottom: 1px solid var(--sp-line);
+  display: flex;
+  align-items: center;
+}
+
 /* Search input inside the sidebar */
 .sidebar-search {
   padding: 0.75rem 1rem;
@@ -330,7 +376,7 @@ body {
   max-width: 190px;
 }
 
-/* AVATARS + ONLINE DOT 
+/* AVATARS + ONLINE DOT
    Avatar = circular image with a tiny green dot for online
  */
 
@@ -478,7 +524,7 @@ body {
   margin-top: 4px;
 }
 
-/*  MESSAGE INPUT BAR 
+/*  MESSAGE INPUT BAR
    Icon buttons + text field + send button
 */
 .composer {
