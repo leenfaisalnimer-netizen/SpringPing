@@ -136,7 +136,7 @@ function sendToClientByUserId(userId, rawJson) {
   if (client) {
     client.send(rawJson);
   }
-}
+}//change
 
 function deliverDirectMessage(message) {
   const rawJson = JSON.stringify({ type: 'message', data: message });
